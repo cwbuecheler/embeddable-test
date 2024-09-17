@@ -32,6 +32,20 @@
 	}
 }
 
-.pikagraph {
+.pikadiv {
+	display: inline-block;
+}
+.pikadiv .pikagraph {
 	width: 30px;
+}
+.hovered {
+	width: 300px;
+	height: 300px;
+	position: relative;
+}
+.hovered img {
+	width: 300px !important;
+	position: absolute;
+	top: 130px;
+	left: 0px;
 }

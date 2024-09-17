@@ -1,9 +1,11 @@
 // React & 3rd Party Libraries
 import { useState } from 'react';
+import cx from 'clsx';
 
 // Mantine & Related
 import { Container, Group, Burger, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useHover } from '@mantine/hooks';
 
 // Local Modules
 import classes from './Header.module.css';
@@ -26,6 +28,7 @@ const Header: React.FC<Props> = (props) => {
 	const { handleMenuClick } = props;
 
 	const [opened, { toggle }] = useDisclosure(false);
+	const { hovered, ref } = useHover();
 	const [active, setActive] = useState(links[0].link);
 
 	const items = links.map((link) => (
@@ -49,7 +52,9 @@ const Header: React.FC<Props> = (props) => {
 			<Container size="md" className={classes.inner}>
 				<Group>
 					<Title order={1}>PokéCharts</Title>
-					<img src={pikagraph} className={classes.pikagraph} alt="Pikagraph Image" />
+					<div className={cx(classes.pikadiv, { [classes.hovered]: hovered })} ref={ref}>
+						<img src={pikagraph} className={classes.pikagraph} alt="Pikagraph Image" />
+					</div>
 				</Group>
 				<Group gap={5} visibleFrom="xs">
 					{items}

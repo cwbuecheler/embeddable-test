@@ -1,6 +1,5 @@
 // React & 3rd Party Libraries
 import { useState } from 'react';
-import cx from 'clsx';
 
 // Mantine
 import { Anchor, Box, ScrollArea, Table, TextInput } from '@mantine/core';
