@@ -2,6 +2,12 @@
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
+// Mantine & Related
+import { Box } from '@mantine/core';
+
+// Local Modules
+import classes from './Readme.module.css';
+
 const ReadMe = () => {
 	const [markdown, setMarkdown] = useState('');
 
@@ -11,7 +17,11 @@ const ReadMe = () => {
 			.then((text) => setMarkdown(text));
 	}, []);
 
-	return <ReactMarkdown>{markdown}</ReactMarkdown>;
+	return (
+		<Box className={classes.textcontainer}>
+			<ReactMarkdown>{markdown}</ReactMarkdown>
+		</Box>
+	);
 };
 
 export default ReadMe;

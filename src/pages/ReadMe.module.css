@@ -1,0 +1,17 @@
+.textcontainer {
+}
+
+.textcontainer code {
+	background: #f3f3f3;
+	color: #cb0f89;
+	padding: 2px 4px;
+	border-radius: 4px;
+}
+
+.textcontainer a {
+	color: var(--mantine-color-blue-filled);
+	text-decoration: none;
+}
+.textcontainer a:hover {
+	text-decoration: underline;
+}
