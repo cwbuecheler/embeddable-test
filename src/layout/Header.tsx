@@ -10,7 +10,7 @@ import classes from './Header.module.css';
 import pikagraph from '../assets/pikagraph.svg';
 
 // TS Types
-import type { Link } from '../../types/data.d.ts';
+import { Link } from '../../types/data';
 
 const links: Link[] = [
 	{ label: 'Home', link: '/home' },

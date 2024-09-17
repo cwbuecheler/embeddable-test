@@ -46,4 +46,6 @@ I use Prettier for code formatting. I have it set to my particular defaults (jus
 
 ### Issues / Challenges
 
-TBD
+The first challenge I encountered was that I was hammering the PokeAPI. I noted that 3rd party modules exists to get around this, but I wanted to stick with rolling my own, so I added some quick caching to the initial lookup and the individual Pokémon lookups to take care of that. No real reason for this particular app to get the date more than once.
+
+The next challenge was just getting Chart.js to work, as I hadn't used it before. Turned out to be pretty straightforward, although I did borrow a 3rd party library to implement it in React because I didn't want to get too into the weeds componentizing Chart.js itself.
