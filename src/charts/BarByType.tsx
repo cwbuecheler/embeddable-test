@@ -5,12 +5,15 @@ import { CategoryScale } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
 // Mantine & Related
-import { Box, Space, Switch } from '@mantine/core';
+import { Box, Space, Switch, Title } from '@mantine/core';
 
-Chart.register(CategoryScale);
+// Local Modules
+import { capitalize } from '../../utils/common.ts';
 
 // TS Types
 import { FullPokeDataPartial, PokemonTypes, PokeTypeData } from '../../types/data';
+
+Chart.register(CategoryScale);
 
 const colors = [
 	'#094E1A',
@@ -32,6 +35,11 @@ const colors = [
 	'#FFF0F8',
 ];
 
+type Props = {
+	fullPokemonData: FullPokeDataPartial[];
+};
+
+// Helper function to format the data for Chart.js
 const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
 	const pokeTypeMap: PokemonTypes = {};
 	let fullCount = 0;
@@ -41,12 +49,12 @@ const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
 
 	// Fill the map
 	for (let pokemon of fullData) {
-		for (let type of pokemon.types) {
-			if (pokeTypeMap[type.type.name]) {
-				pokeTypeMap[type.type.name] += 1;
+		for (let typeEntry of pokemon.types) {
+			if (pokeTypeMap[typeEntry.type.name]) {
+				pokeTypeMap[typeEntry.type.name] += 1;
 				fullCount += 1;
 			} else {
-				pokeTypeMap[type.type.name] = 1;
+				pokeTypeMap[typeEntry.type.name] = 1;
 				fullCount += 1;
 			}
 		}
@@ -55,7 +63,7 @@ const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
 	let pokeDataArray: PokeTypeData[] = [];
 	for (let [key, value] of Object.entries(pokeTypeMap)) {
 		pokeDataArray.push({
-			type: key,
+			type: capitalize(key),
 			count: dataType === 'percents' ? parseFloat(((value / fullCount) * 100).toFixed(2)) : value,
 		});
 	}
@@ -64,10 +72,7 @@ const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
 	return pokeDataArray.sort((a, b) => b.count - a.count);
 };
 
-type Props = {
-	fullPokemonData: FullPokeDataPartial[];
-};
-
+// Main Component
 const BarByType: React.FC<Props> = (props) => {
 	const { fullPokemonData } = props;
 
@@ -86,13 +91,17 @@ const BarByType: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<div>
+		<Box>
+			<Title order={2}>{`Pokémon By Type ${checked ? '(percent)' : '(count)'}`}</Title>
+			<Space h="md" />
+			<Switch checked={checked} label="Show Percents" onChange={handleToggle} />
+			<Space h="lg" />
 			<Bar
 				data={{
 					labels: pokeBarData.map((row) => row.type),
 					datasets: [
 						{
-							label: `Pokemon By Type ${checked ? '(percent)' : '(count)'}`,
+							label: '',
 							data: pokeBarData.map((row) => row.count),
 							backgroundColor: colors,
 						},
@@ -110,6 +119,9 @@ const BarByType: React.FC<Props> = (props) => {
 						},
 					},
 					plugins: {
+						legend: {
+							display: false,
+						},
 						tooltip: {
 							callbacks: {
 								label: (ctx) => {
@@ -122,11 +134,7 @@ const BarByType: React.FC<Props> = (props) => {
 					},
 				}}
 			/>
-			<Space h="md" />
-			<Box pl={30}>
-				<Switch checked={checked} label="Show Percents" onChange={handleToggle} />
-			</Box>
-		</div>
+		</Box>
 	);
 };
 

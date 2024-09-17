@@ -8,7 +8,7 @@
 2. `cd embeddable-test`
 3. `npm i`
 4. `npm start`
-5. A browser window should open automatically for you, but if not, navigate to []
+5. A browser window should open automatically for you, but if not, navigate to [http://localhost:5173/](http://localhost:5173/)
 
 ### Reasoning / Approach
 
@@ -48,4 +48,6 @@ I use Prettier for code formatting. I have it set to my particular defaults (jus
 
 The first challenge I encountered was that I was hammering the PokeAPI. I noted that 3rd party modules exists to get around this, but I wanted to stick with rolling my own, so I added some quick caching to the initial lookup and the individual Pokémon lookups to take care of that. No real reason for this particular app to get the date more than once.
 
-The next challenge was just getting Chart.js to work, as I hadn't used it before. Turned out to be pretty straightforward, although I did borrow a 3rd party library to implement it in React because I didn't want to get too into the weeds componentizing Chart.js itself.
+The next challenge was just getting Chart.js to work, as I hadn't used it before. Turned out to be pretty straightforward, although I did borrow a 3rd party library to implement it in React because I didn't want to get too into the weeds componentizing Chart.js itself. This wasn't particularly difficult to get running, so I went ahead and implemented the percent toggle on it. The hardest part there was figuring out the syntax to change the axis and tooltip data, but again &hellip; not too rough.
+
+I cleaned things up, added some titles, made things pretty, and then set about tackling the filtering task. It didn't seem like it'd be very useful to apply the filtering to the charts themselves, so I instead created a quick data table with Mantine down below the charts and then added filtering to that.

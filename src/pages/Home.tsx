@@ -1,10 +1,11 @@
 // Mantine & Related
-import { Box, Loader } from '@mantine/core';
+import { Box, Divider, Loader, Space } from '@mantine/core';
 
 // Local Modules
+import BarByType from '../charts/BarByType';
+import PieByType from '../charts/PieByType';
 import useGetAllPokemon from '../hooks/useGetAllPokemon';
 import useGetFullPokeData from '../hooks/useGetFullPokeData';
-import BarByType from '../charts/BarByType';
 
 // Main Component
 const Home: React.FC = () => {
@@ -18,7 +19,13 @@ const Home: React.FC = () => {
 					<Loader />
 				</Box>
 			) : (
-				<BarByType fullPokemonData={fullPokemonData} />
+				<>
+					<BarByType fullPokemonData={fullPokemonData} />
+					<Space h="xl" mb={30} />
+					<Divider />
+					<Space h="xl" mt={30} />
+					<PieByType fullPokemonData={fullPokemonData} />
+				</>
 			)}
 		</Box>
 	);
