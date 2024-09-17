@@ -1,10 +1,13 @@
+// React & 3rd Party Libraries
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
 
-// Mantine basics
+// Mantine & Related
 import { createTheme, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+
+// Local Modules
+import App from './App.tsx';
 
 const theme = createTheme({
 	// no theme overrides yet

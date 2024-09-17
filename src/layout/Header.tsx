@@ -6,20 +6,20 @@ import { Container, Group, Burger, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 // Local Modules
-import pikagraph from '../assets/pikagraph.svg';
 import classes from './Header.module.css';
+import pikagraph from '../assets/pikagraph.svg';
 
 // TS Types
 import type { Link } from '../../types/data.d.ts';
 
 const links: Link[] = [
-	{ link: '/home', label: 'Home' },
-	{ link: '/readme', label: 'ReadMe' },
+	{ label: 'Home', link: '/home' },
+	{ label: 'ReadMe', link: '/readme' },
 ];
 
-// TBD
+// I like to keep Props typedefs in the component rather than a separate file
 type Props = {
-	handleMenuClick: (linkName: string) => void;
+	handleMenuClick: (label: string) => void;
 };
 
 const Header: React.FC<Props> = (props) => {
