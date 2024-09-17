@@ -17,7 +17,6 @@ const PokeTable: React.FC<Props> = (props) => {
 	const [search, setSearch] = useState('');
 	const [filteredPokemon, setFilteredPokemon] = useState<FullPokeDataPartial[]>(fullPokemonData);
 
-	// This is a little quick and dirty - with very large datasets, it might get slow
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.currentTarget;
 		setSearch(value);

@@ -16,6 +16,10 @@
 
 I used Vite to scaffold the React app because it's quick and easy, its server is faster than most other options, it's not as complex as Next.js&mdash;which felt like overkill for this particular project&mdash;and it supports TypeScript out of the box.
 
+#### State
+
+I'm opting to just use component state and not set up a store with something like [Redux](https://redux.js.org/) / [Mobx State Tree](https://github.com/mobxjs/mobx-state-tree) / [Zustand](https://github.com/pmndrs/zustand). I'm not against using app state but you can do a lot in modern React without it, and particularly given that our entire app is two pages (and one of them is just this readme), something more complex isn't needed here.
+
 #### Routing
 
 I opted not to spend time setting up React Router and instead implemented an extremely simple component switcher via `useState` mainly just to make the app look a little more fleshed out. Most of the time I'd be using an out-of-the-box router like Next.js's.
@@ -50,4 +54,4 @@ The first challenge I encountered was that I was hammering the PokeAPI. I noted 
 
 The next challenge was just getting Chart.js to work, as I hadn't used it before. Turned out to be pretty straightforward, although I did borrow a 3rd party library to implement it in React because I didn't want to get too into the weeds componentizing Chart.js itself. This wasn't particularly difficult to get running, so I went ahead and implemented the percent toggle on it. The hardest part there was figuring out the syntax to change the axis and tooltip data, but again &hellip; not too rough.
 
-I cleaned things up, added some titles, made things pretty, and then set about tackling the filtering task. It didn't seem like it'd be very useful to apply the filtering to the charts themselves, so I instead created a quick data table with Mantine down below the charts and then added filtering to that.
+I cleaned things up, added some titles, made things pretty, and then set about tackling the filtering task. It didn't seem like it'd be very useful to apply the filtering to the charts themselves, so I instead created a quick table with Mantine down below the charts and then added filtering to that. It's a pretty straightforward filter since we're only going by name.
