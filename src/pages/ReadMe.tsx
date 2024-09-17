@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 // Mantine & Related
-import { Box } from '@mantine/core';
+import { Box, Space } from '@mantine/core';
 
 // Local Modules
 import classes from './Readme.module.css';
@@ -20,6 +20,7 @@ const ReadMe = () => {
 	return (
 		<Box className={classes.textcontainer}>
 			<ReactMarkdown>{markdown}</ReactMarkdown>
+			<Space h="xl" mb={120} />
 		</Box>
 	);
 };
