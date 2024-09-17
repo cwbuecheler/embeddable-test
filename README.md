@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# Embeddable Code Test - PokeCharts
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## [Christopher Buecheler](https://closebrace.com)
 
-Currently, two official plugins are available:
+### How to run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone this repo
+2. `cd embeddable-test`
+3. `npm i`
+4. `npm start`
+5. A browser window should open automatically for you, but if not, navigate to []
 
-## Expanding the ESLint configuration
+### Reasoning / Approach
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### Vite
 
-- Configure the top-level `parserOptions` property like this:
+I used Vite to scaffold the React app because it's quick and easy, its server is faster than most other options, it's not as complex as Next.js&mdash;which felt like overkill for this particular project&mdash;and because it supports TypeScript out of the box.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+#### Routing
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+I opted not to spend time setting up React Router and instead implemented an extremely simple component switcher via `useState` mainly just to make the app look a little more fleshed out.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+#### Fetch
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+In a larger application I'd probably use something like [SWR](https://swr.vercel.app/) for data fetching since it provides caching and mutation while eliminating the need for `useEffect`, but in this instance I wanted to show that I was comfortable with the browser Fetch API, so I went that direction instead.
+
+#### Mantine
+
+I've worked extensively with a variety of design libraries, including Material-UI, Reactstrap, and more. [Mantine](https://mantine.dev/) is my current favorite, and the one I've most recently worked with, so I went with that for speed.
+
+#### Chart.js
+
+I went with Chart.js for DataVis because my understanding is that Embeddable works with it pretty regularly, and I figured it made sense to show I could manipulate it.
+
+#### Prettier
+
+I use Prettier for code formatting. I have it set to my particular defaults (justification below) but am happy to work within whatever formatting conventions Embeddable prefers.
+
+- _"arrowParens": "always"_ - Makes it quicker to add additional params to arrow functions
+- _"printWidth": 100_ - A good width for modern resolutions while still keeping code readable
+- _"semi": true_ - Avoids rare edge case issues where JS semi insertion works improperly
+- _"singleQuote": true_ - I like double quotes for React JSX, single quotes everywhere else
+- _"tabWidth": 2_ - I find 4-space tabs too chunky
+- _"trailingComma": "all",_ - Makes it quicker to add additional properties to objects
+- _"useTabs": true_ - Tabs are more accessibility-friendly than spaces, as they can be adjusted by the individual with no impact on the actual code.
+
+### Issues / Challenges
+
+TBD
