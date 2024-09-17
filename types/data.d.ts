@@ -53,3 +53,11 @@ export type FullPokeDataPartial = {
 	types: PokeType[];
 	weight: number;
 };
+
+type PokeType = {
+	slot: 1;
+	type: {
+		name: string;
+		url: string;
+	};
+};
