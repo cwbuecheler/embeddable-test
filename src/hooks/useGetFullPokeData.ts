@@ -6,24 +6,57 @@ import { PokemonListItem, Pokemon } from '../../types/data';
 
 // iterate over all the pokemon and get their data
 const getFullPokemonData = async (allPokemon: PokemonListItem[]) => {
-	const allPokemonData: any[] = [];
 	if (allPokemon.length > 0) {
-		for (let pokemon of allPokemon) {
+		const pokemonRespPromises: Promise<Response>[] = [];
+		for (let pokemonStub of allPokemon) {
 			try {
-				// I don't love awaiting in loops. In a refactor I'd work with Promise.allSettled
-				// but I don't know that syntax as well, so sticking w/ await for expediency
-				const result = await fetch(pokemon.url);
-				if (result.status !== 200) {
-					throw new Error(`failed fetch - ${result.status}`);
-				}
-				const json = await result.json();
-				allPokemonData.push(json);
+				const result = fetch(pokemonStub.url);
+				pokemonRespPromises.push(result);
 			} catch (err: any) {
-				console.error(`Couldn't fetch pokémon ${pokemon.name} - ${err.message}`);
+				console.error(`Couldn't fetch pokémon ${pokemonStub.name} - ${err.message}`);
 			}
 		}
+
+		// Wait for all the promises to settle
+		const responses = await Promise.allSettled(pokemonRespPromises);
+
+		// Handle rejections
+		responses.forEach((resp) => {
+			if (resp.status === 'rejected') {
+				console.error(`Couldn't fetch pokémon - ${resp.reason}`);
+			}
+		});
+
+		// Filter down to just the successful pokemon fetches
+		const fulfilledResps = responses
+			.filter((resp) => resp.status === 'fulfilled')
+			.map((resp) => resp.value);
+
+		// Convert fulfilled responses to JSON
+		const pokemonJsonPromises: Promise<Pokemon>[] = [];
+		for (let resp of fulfilledResps) {
+			try {
+				const pokemonJson = resp.json();
+				pokemonJsonPromises.push(pokemonJson);
+			} catch (err) {
+				console.error(`Couldn't convert pokemon response to JSON`);
+			}
+		}
+
+		// Wait for all the promises to settle
+		const allPokemonJson: PromiseSettledResult<Pokemon>[] = await Promise.allSettled(
+			pokemonJsonPromises,
+		);
+
+		// Filter down to just the successful pokemon json
+		const fulfilledJson = allPokemonJson
+			.filter((resp) => resp.status === 'fulfilled')
+			.map((resp) => resp.value);
+		return fulfilledJson;
 	}
-	return allPokemonData;
+
+	// If we didn't get a list of pokemon to begin with, return an empty array
+	return [];
 };
 
 // Main Hook
