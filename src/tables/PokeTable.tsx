@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Anchor, Box, ScrollArea, Table, TextInput } from '@mantine/core';
 
 // TS Types
-import { Pokemon, PokeType } from '../../types/data';
+import { Pokemon, PokemonType } from '../../types/data';
 
 interface Props {
 	fullPokemonData: Pokemon[];
@@ -29,7 +29,7 @@ const PokeTable: React.FC<Props> = (props) => {
 		if (pokemon.types?.length < 1) {
 			return <span>Unknown</span>;
 		}
-		const typeElements = pokemon.types.map((typeEntry: PokeType, index: number) => {
+		const typeElements = pokemon.types.map((typeEntry: PokemonType, index: number) => {
 			return (
 				<span key={`${pokemon.name}-${index}`}>
 					<Anchor href={typeEntry.type.url} target="_blank">

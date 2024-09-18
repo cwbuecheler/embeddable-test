@@ -28,7 +28,7 @@ type PokemonTypeItem = {
  * Didn't want to spend a huge amount of time typing the entire API value for a full pokemon
  * object ... but I wanted some sort of typing to carry through the app!
  */
-export type FullPokeDataPartial = {
+export type Pokemon = {
 	abilities: any[];
 	base_experience: number;
 	cries: any;
@@ -50,11 +50,11 @@ export type FullPokeDataPartial = {
 	};
 	sprites: any;
 	stats: any[];
-	types: PokeType[];
+	types: PokemonType[];
 	weight: number;
 };
 
-type PokeType = {
+type PokemonType = {
 	slot: 1;
 	type: {
 		name: string;
