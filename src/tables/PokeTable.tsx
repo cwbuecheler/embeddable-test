@@ -5,17 +5,17 @@ import { useState } from 'react';
 import { Anchor, Box, ScrollArea, Table, TextInput } from '@mantine/core';
 
 // TS Types
-import { FullPokeDataPartial, PokeType } from '../../types/data';
+import { Pokemon, PokeType } from '../../types/data';
 
 interface Props {
-	fullPokemonData: FullPokeDataPartial[];
+	fullPokemonData: Pokemon[];
 }
 
 const PokeTable: React.FC<Props> = (props) => {
 	const { fullPokemonData } = props;
 
 	const [search, setSearch] = useState('');
-	const [filteredPokemon, setFilteredPokemon] = useState<FullPokeDataPartial[]>(fullPokemonData);
+	const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>(fullPokemonData);
 
 	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.currentTarget;
@@ -25,26 +25,26 @@ const PokeTable: React.FC<Props> = (props) => {
 	};
 
 	// Render Table Rows
-	const TableRows = filteredPokemon.map((row: FullPokeDataPartial) => {
-		if (row.types?.length < 1) {
+	const TableRows = filteredPokemon.map((pokemon: Pokemon) => {
+		if (pokemon.types?.length < 1) {
 			return <span>Unknown</span>;
 		}
-		const typeElements = row.types.map((typeEntry: PokeType, index: number) => {
+		const typeElements = pokemon.types.map((typeEntry: PokeType, index: number) => {
 			return (
-				<span key={`${row.name}-${index}`}>
+				<span key={`${pokemon.name}-${index}`}>
 					<Anchor href={typeEntry.type.url} target="_blank">
 						{typeEntry.type.name}
 					</Anchor>
-					{`${index !== row.types.length - 1 ? ', ' : ''}`}
+					{`${index !== pokemon.types.length - 1 ? ', ' : ''}`}
 				</span>
 			);
 		});
 
 		return (
-			<Table.Tr key={row.name}>
-				<Table.Td>{row.name}</Table.Td>
+			<Table.Tr key={pokemon.name}>
+				<Table.Td>{pokemon.name}</Table.Td>
 				<Table.Td>{typeElements}</Table.Td>
-				<Table.Td>{row.weight}</Table.Td>
+				<Table.Td>{pokemon.weight}</Table.Td>
 			</Table.Tr>
 		);
 	});

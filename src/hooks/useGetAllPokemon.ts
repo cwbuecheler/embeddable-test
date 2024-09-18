@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 // TS Types
-import { AllPokemonJson, AllPokemonJsonItem } from '../../types/data';
+import { PokemonList, PokemonListItem } from '../../types/data';
 
 // Use the PokéAPI to fetch data about the first 151 Pokémon (Generation 1).
 const fetchPokemon = async () => {
@@ -16,7 +16,7 @@ const fetchPokemon = async () => {
 		}
 
 		// Get response JSON
-		const pokeJson: AllPokemonJson = await pokeResp.json();
+		const pokeJson: PokemonList = await pokeResp.json();
 
 		// If there's no results property, something went wrong
 		if (!pokeJson.results) {
@@ -31,7 +31,7 @@ const fetchPokemon = async () => {
 
 // Main Hook
 const useGetAllPokemon = () => {
-	const [allPokemon, setAllPokemon] = useState<AllPokemonJsonItem[]>([]);
+	const [allPokemon, setAllPokemon] = useState<PokemonListItem[]>([]);
 
 	useEffect(() => {
 		// Initial data fetch

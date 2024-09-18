@@ -2,10 +2,10 @@
 import { useState } from 'react';
 
 // TS Types
-import { AllPokemonJsonItem, FullPokeDataPartial } from '../../types/data';
+import { PokemonListItem, Pokemon } from '../../types/data';
 
 // iterate over all the pokemon and get their data
-const getFullPokemonData = async (allPokemon: AllPokemonJsonItem[]) => {
+const getFullPokemonData = async (allPokemon: PokemonListItem[]) => {
 	const allPokemonData: any[] = [];
 	if (allPokemon.length > 0) {
 		for (let pokemon of allPokemon) {
@@ -27,8 +27,8 @@ const getFullPokemonData = async (allPokemon: AllPokemonJsonItem[]) => {
 };
 
 // Main Hook
-const useGetFullPokeData = (allPokemon: AllPokemonJsonItem[]) => {
-	const [fullPokeData, setFullPokeData] = useState<FullPokeDataPartial[]>([]);
+const useGetFullPokeData = (allPokemon: PokemonListItem[]) => {
+	const [fullPokeData, setFullPokeData] = useState<Pokemon[]>([]);
 	const [hasQueriedAPI, setHasQueriedAPI] = useState<boolean>(false);
 
 	if (allPokemon.length > 0 && fullPokeData.length < 1 && !hasQueriedAPI) {

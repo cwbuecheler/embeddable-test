@@ -12,18 +12,18 @@ import classes from './PieByType.module.css';
 import { capitalize } from '../../utils/common.ts';
 
 // TS Types
-import { FullPokeDataPartial, PokemonTypes, PokeTypeData } from '../../types/data';
+import { Pokemon, PokemonTypeItem } from '../../types/data';
 
 Chart.register(CategoryScale);
 
 const colors = ['#3DC2FF', '#2441FF'];
 
 type Props = {
-	fullPokemonData: FullPokeDataPartial[];
+	fullPokemonData: Pokemon[];
 };
 
 // Helper function to format the data for Chart.js
-const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
+const createPokeData = (fullData: Pokemon[], dataType: string) => {
 	let fullCount = fullData.length;
 	const pokeTypeMap = {
 		single: 0,
@@ -43,7 +43,7 @@ const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
 	}
 
 	// Create a data array
-	let pokeDataArray: PokeTypeData[] = [];
+	let pokeDataArray: PokemonTypeItem[] = [];
 	for (let [key, value] of Object.entries(pokeTypeMap)) {
 		pokeDataArray.push({
 			type: capitalize(key),
@@ -60,7 +60,7 @@ const PieByType: React.FC<Props> = (props) => {
 	const { fullPokemonData } = props;
 
 	const [checked, setChecked] = useState(false);
-	const [pokePieData, setPokePieData] = useState<PokeTypeData[]>(
+	const [pokePieData, setPokePieData] = useState<PokemonTypeItem[]>(
 		createPokeData(fullPokemonData, 'counts'),
 	);
 

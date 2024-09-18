@@ -1,25 +1,25 @@
-export type Link = {
+export type HeaderLink = {
 	label: string;
 	link: string;
 };
 
-export type AllPokemonJson = {
+export type PokemonList = {
 	count: number;
 	next: string;
 	previous: string;
-	results: PokeJsonItem[];
+	results: PokemonListItem[];
 };
 
-export type AllPokemonJsonItem = {
+export type PokemonListItem = {
 	name: string;
 	url: string;
 };
 
-type PokemonTypes = {
+type PokemonTypeMap = {
 	[key: string]: number;
 };
 
-type PokeTypeData = {
+type PokemonTypeItem = {
 	type: string;
 	count: number;
 };

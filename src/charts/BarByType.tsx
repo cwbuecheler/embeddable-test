@@ -11,7 +11,7 @@ import { Box, Space, Switch, Title } from '@mantine/core';
 import { capitalize } from '../../utils/common.ts';
 
 // TS Types
-import { FullPokeDataPartial, PokemonTypes, PokeTypeData } from '../../types/data';
+import { Pokemon, PokemonTypeMap, PokemonTypeItem } from '../../types/data';
 
 Chart.register(CategoryScale);
 
@@ -36,12 +36,12 @@ const colors = [
 ];
 
 type Props = {
-	fullPokemonData: FullPokeDataPartial[];
+	fullPokemonData: Pokemon[];
 };
 
 // Helper function to format the data for Chart.js
-const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
-	const pokeTypeMap: PokemonTypes = {};
+const createPokeData = (fullData: Pokemon[], dataType: string) => {
+	const pokeTypeMap: PokemonTypeMap = {};
 	let fullCount = 0;
 	if (fullData.length < 1) {
 		return [];
@@ -60,7 +60,7 @@ const createPokeData = (fullData: FullPokeDataPartial[], dataType: string) => {
 		}
 	}
 	// Create a data array
-	let pokeDataArray: PokeTypeData[] = [];
+	let pokeDataArray: PokemonTypeItem[] = [];
 	for (let [key, value] of Object.entries(pokeTypeMap)) {
 		pokeDataArray.push({
 			type: capitalize(key),
@@ -77,7 +77,7 @@ const BarByType: React.FC<Props> = (props) => {
 	const { fullPokemonData } = props;
 
 	const [checked, setChecked] = useState(false);
-	const [pokeBarData, setPokeBarData] = useState<PokeTypeData[]>(
+	const [pokeBarData, setPokeBarData] = useState<PokemonTypeItem[]>(
 		createPokeData(fullPokemonData, 'counts'),
 	);
 

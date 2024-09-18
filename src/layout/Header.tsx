@@ -12,9 +12,9 @@ import classes from './Header.module.css';
 import pikagraph from '../assets/pikagraph.svg';
 
 // TS Types
-import { Link } from '../../types/data';
+import { HeaderLink } from '../../types/data';
 
-const links: Link[] = [
+const links: HeaderLink[] = [
 	{ label: 'Home', link: '/home' },
 	{ label: 'ReadMe', link: '/readme' },
 ];
