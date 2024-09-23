@@ -24,7 +24,7 @@ type Props = {
 
 // Helper function to format the data for Chart.js
 const createPokeData = (fullData: Pokemon[], dataType: string) => {
-	let fullCount = fullData.length;
+	const fullCount = fullData.length;
 	const pokeTypeMap = {
 		single: 0,
 		dual: 0,
@@ -34,7 +34,7 @@ const createPokeData = (fullData: Pokemon[], dataType: string) => {
 		return [];
 	}
 
-	for (let pokemon of fullData) {
+	for (const pokemon of fullData) {
 		if (pokemon.types.length < 2) {
 			pokeTypeMap.single += 1;
 		} else {
@@ -43,8 +43,8 @@ const createPokeData = (fullData: Pokemon[], dataType: string) => {
 	}
 
 	// Create a data array
-	let pokeDataArray: PokemonTypeItem[] = [];
-	for (let [key, value] of Object.entries(pokeTypeMap)) {
+	const pokeDataArray: PokemonTypeItem[] = [];
+	for (const [key, value] of Object.entries(pokeTypeMap)) {
 		pokeDataArray.push({
 			type: capitalize(key),
 			count: dataType === 'percents' ? parseFloat(((value / fullCount) * 100).toFixed(2)) : value,
@@ -100,8 +100,8 @@ const PieByType: React.FC<Props> = (props) => {
 							tooltip: {
 								callbacks: {
 									label: (ctx) => {
-										let label = ctx.dataset.label;
-										let formattedValue = ctx.formattedValue;
+										const label = ctx.dataset.label;
+										const formattedValue = ctx.formattedValue;
 										return `${label} ${formattedValue}${checked ? '%' : ''}`;
 									},
 								},
