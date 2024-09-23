@@ -8,7 +8,7 @@ import { PokemonListItem, Pokemon } from '../../types/data';
 const getFullPokemonData = async (allPokemon: PokemonListItem[]) => {
 	if (allPokemon.length > 0) {
 		const pokemonRespPromises: Promise<Response>[] = [];
-		for (let pokemonStub of allPokemon) {
+		for (const pokemonStub of allPokemon) {
 			try {
 				const result = fetch(pokemonStub.url);
 				pokemonRespPromises.push(result);
@@ -34,12 +34,12 @@ const getFullPokemonData = async (allPokemon: PokemonListItem[]) => {
 
 		// Convert fulfilled responses to JSON
 		const pokemonJsonPromises: Promise<Pokemon>[] = [];
-		for (let resp of fulfilledResps) {
+		for (const resp of fulfilledResps) {
 			try {
 				const pokemonJson = resp.json();
 				pokemonJsonPromises.push(pokemonJson);
-			} catch (err) {
-				console.error(`Couldn't convert pokemon response to JSON`);
+			} catch (err: any) {
+				console.error(`Couldn't convert pokemon response to JSON - ${err}`);
 			}
 		}
 
